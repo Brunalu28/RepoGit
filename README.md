@@ -125,3 +125,50 @@ Esse comando cria uma cópia do repositório na sua máquina, com ele você não
 `$ git clone <url_do_repo>`
 
 - Depois disso você já pode começar a trabalhar no seu projeto normalmente, e commitar as atualizações, só se atente a estar com o nome das branchs sincronizados e as atualizações também, para caso esteja trabalhando em equipe.
+
+## Usando o protocolo SSH no github 🔐:
+
+O ssh é um protocolo para conectar servidores locais e remotos, permitindo a autenticação entre eles. O uso dessa chave no github permite a conexão sem precisar fornecer usuário e personal token (código de autenticação) a cada visita, commit ou qualquer outra movimentação semelhante.
+
+É importante lembrar que pra realizar esses comandos é importante estar no terminal do `git bash` ou em algum dos presentes nas `distribuições Linux`.
+
+### Liste as chaves:
+
+`ls -al ~/.ssh`
+
+Verifique se você possui alguma das seguintes chaves: `"id_rsa.pub"`, `"id_ecdsa.pub"` ou `"id_ed25519.pub"`.
+
+![image](https://github.com/Brunalu28/RepoGit/assets/44930475/ea2904ff-9147-470d-b51d-6b3ff0404a26)
+
+Caso não tenha... Vamos criar suas chaves!
+
+- Para criar uma chave ed25519: `ssh-keygen -t ed25519 -C "your_email@example.com"`
+- Para criar uma chave rsa: `ssh-keygen -t rsa -b 4096 -C "your_email@example.com"`
+
+A diferença entre esses dois tipos de chaves é apenas a quantidade de bits presentes em cada, enquanto a ed25519 possui 256 bits, sendo mais rápida, a rsa é de 2048 ou mais bits é mais segura, porém a escolha fica a seu critério!
+
+![image](https://github.com/Brunalu28/RepoGit/assets/44930475/2c050149-565d-4413-821f-8f14542bb383)
+
+- Enter para salvar chave na máquina;
+- Se já tiver alguma chave tem a opção de sobrescrever ou não;
+- Adicione uma senha (é por ela que vocẽ vai autenticar qualquer acesso);
+- Confirme a senha;
+
+Pra finalizar...
+
+Execute o comando:
+
+No Linux: `cat ~/.ssh/id_rsa.pub` // Com ele você pode pegar e copiar o código.
+
+No Windows: `clip < ~/.ssh/id_rsa.pub.` // Já copia o conteúdo da sua chave para a área de transferência.
+
+MacOS: `pbcopy < ~/.ssh/id_rsa.pub`
+
+![image](https://github.com/Brunalu28/RepoGit/assets/44930475/1915ecf8-56a8-4a4f-a6c5-869058463678)
+
+- Entre nas configurações e selecione SSH and GPG Keys;
+- Adicione um nome e cole o código na área "key";
+- Salve tudo e tente fazer um commit ou pull para testar se tá tudo ok.
+
+Prontinho, tudo configurado com sucesso. 🤩
+
